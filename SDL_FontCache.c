@@ -1344,7 +1344,9 @@ Uint8 FC_LoadFont_RW(FC_Font* font, FC_Target* renderer, SDL_RWops* file_rwops_t
     if(outline)
     {
         style &= ~TTF_STYLE_OUTLINE;
+#if (!defined _WIN32)
         TTF_SetFontOutline(ttf, 1);
+#endif
     }
     TTF_SetFontStyle(ttf, style);
 
