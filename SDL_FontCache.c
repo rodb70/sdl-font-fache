@@ -198,7 +198,7 @@ char* FC_GetStringLatin1(void)
         c = 0xA0;
         while(1)
         {
-            buffer[i] = 0xC2;
+            buffer[i] = (char)0xC2;
             buffer[i+1] = c;
             if(c == 0xBF)
                 break;
@@ -209,7 +209,7 @@ char* FC_GetStringLatin1(void)
         c = 0x80;
         while(1)
         {
-            buffer[i] = 0xC3;
+            buffer[i] = (char)0xC3;
             buffer[i+1] = c;
             if(c == 0xBF)
                 break;
@@ -1965,6 +1965,7 @@ static FC_StringList* FC_GetBufferFitToColumn(FC_Font* font, int width, FC_Scale
     FC_StringList** current = &result;
 
     FC_StringList *ls, *iter;
+    (void)scale;
 
     ls = (keep_newlines? FC_ExplodeAndKeep(fc_buffer, '\n') : FC_Explode(fc_buffer, '\n'));
     for(iter = ls; iter != NULL; iter = iter->next)
@@ -2769,6 +2770,7 @@ Uint16 FC_GetPositionFromOffset(FC_Font* font, float x, float y, int column_widt
     int current_x = 0;
     int current_y = 0;
     FC_GlyphData glyph_data;
+    (void)align;
 
     if(formatted_text == NULL || column_width == 0 || font == NULL)
         return 0;
